@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEVLOᵀᴹ</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="icon" type="image/png" href="devlo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <div class="loader-logo">DEVLO</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+      <div class="loader-text">Initializing platform…</div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- App Shell -->
+  <div id="app" style="display:none">
+
+    <!-- Marquee -->
+    <div class="marquee-bar" id="marquee-bar">
+      <div class="marquee-track" id="marquee-track">
+        <span>🚀 Custom Development • Full-Stack Apps • Mobile Solutions • API Integrations • Cloud Deployments 🚀 &nbsp;&nbsp;&nbsp;</span>
+        <span>🚀 Custom Development • Full-Stack Apps • Mobile Solutions • API Integrations • Cloud Deployments 🚀 &nbsp;&nbsp;&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo" data-page="home">DEVLO</a>
+        <div class="nav-links" id="nav-links">
+          <a href="#" class="nav-link" data-page="home">Home</a>
+          <a href="#" class="nav-link" data-page="portfolio">Portfolio</a>
+          <a href="#" class="nav-link admin-only" data-page="admin" style="display:none">Admin</a>
+          <a href="#" class="nav-link auth-only" data-page="dashboard" style="display:none">Dashboard</a>
+          <a href="#" class="nav-link auth-only" data-page="projects" style="display:none">Projects</a>
+        </div>
+        <div class="nav-actions">
+          <div class="notif-bell auth-only" id="notif-bell" style="display:none">
+            <button class="bell-btn" id="bell-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="notif-count" id="notif-count" style="display:none">0</span>
+            </button>
+            <div class="notif-dropdown" id="notif-dropdown" style="display:none">
+              <div class="notif-header">
+                <span>Notifications</span>
+                <button id="mark-all-read">Mark all read</button>
+              </div>
+              <div id="notif-list"></div>
+            </div>
+          </div>
+          <button class="btn-ghost auth-only" id="logout-btn" style="display:none">Logout</button>
+          <button class="btn-primary guest-only" data-page="login" id="login-nav-btn">Login</button>
+          <button class="btn-ghost guest-only" data-page="register" id="register-nav-btn">Register</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- PAGES -->
+
+    <!-- HOME PAGE -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-bg-grid"></div>
+        <div class="hero-content">
+          <div class="hero-badge">Custom Dev Platform</div>
+          <h1 class="hero-title" id="hero-title">We Build What You Imagine</h1>
+          <p class="hero-sub" id="hero-sub">Custom software development, delivered with precision.</p>
+          <div class="hero-actions">
+            <button class="btn-primary large guest-only" data-page="register">Start a Project →</button>
+            <button class="btn-primary large auth-only" data-page="new-request" style="display:none">Request a Project →</button>
+            <button class="btn-outline large" data-page="portfolio">View Portfolio</button>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="code-card">
+            <div class="code-dots"><span></span><span></span><span></span></div>
+            <pre class="code-content"><span class="c-kw">const</span> <span class="c-fn">buildProject</span> = <span class="c-kw">async</span> (idea) => {
+  <span class="c-kw">const</span> plan = <span class="c-kw">await</span> analyze(idea);
+  <span class="c-kw">const</span> result = <span class="c-kw">await</span> develop(plan);
+  <span class="c-kw">return</span> deploy(result);
+};
+
+<span class="c-comment">// Ship fast. Ship right.</span>
+buildProject(<span class="c-str">"your dream app"</span>);</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <section class="features-section">
+        <div class="section-header">
+          <h2>Everything You Need</h2>
+          <p>End-to-end development management in one platform</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feat-icon">⚡</div>
+            <h3>Fast Delivery</h3>
+            <p>Structured ticket system keeps projects on track with clear deadlines and priorities.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feat-icon">🔒</div>
+            <h3>Transparent Pricing</h3>
+            <p>AI-suggested pricing based on complexity. No surprises, no hidden fees.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feat-icon">📁</div>
+            <h3>File Management</h3>
+            <p>Upload docs, designs, and assets directly to tickets. All in one place.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feat-icon">🔔</div>
+            <h3>Real-time Updates</h3>
+            <p>Instant notifications on every status change, ticket update, and project milestone.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feat-icon">📊</div>
+            <h3>Full Visibility</h3>
+            <p>Activity logs, meeting schedules, and project timelines — always visible.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feat-icon">🤝</div>
+            <h3>Dedicated Admin</h3>
+            <p>Direct access to your project manager. Meetings tracked and accountable.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="about-section" id="about-section">
+        <div class="about-inner">
+          <div class="about-text">
+            <div class="section-label">ABOUT US</div>
+            <h2 id="about-title">About Devlo</h2>
+            <p id="about-body">We build custom software solutions tailored to your needs.</p>
+            <button class="btn-primary" data-page="portfolio">See Our Work</button>
+          </div>
+          <div class="about-stats">
+            <div class="stat"><span class="stat-num" id="stat-projects">0</span><span class="stat-label">Projects Delivered</span></div>
+            <div class="stat"><span class="stat-num" id="stat-clients">0</span><span class="stat-label">Happy Clients</span></div>
+            <div class="stat"><span class="stat-num" id="stat-tickets">0</span><span class="stat-label">Tickets Resolved</span></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- PORTFOLIO PAGE -->
+    <section class="page" id="page-portfolio">
+      <div class="page-header">
+        <h1>Our Portfolio</h1>
+        <p>Real projects. Real results.</p>
+      </div>
+      <div class="portfolio-grid" id="portfolio-grid">
+        <div class="portfolio-loading">Loading projects…</div>
+      </div>
+    </section>
+
+    <!-- LOGIN PAGE -->
+    <section class="page" id="page-login">
+      <div class="auth-container">
+        <div class="auth-card">
+          <div class="auth-logo">DEVLO</div>
+          <h2>Welcome back</h2>
+          <p class="auth-sub">Sign in to your account</p>
+          <div id="login-error" class="form-error" style="display:none"></div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="login-email" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="••••••••" />
+          </div>
+          <button class="btn-primary full" id="login-btn">Sign In</button>
+          <p class="auth-switch">No account? <a href="#" data-page="register">Register here</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTER PAGE -->
+    <section class="page" id="page-register">
+      <div class="auth-container">
+        <div class="auth-card">
+          <div class="auth-logo">DEVLO</div>
+          <h2>Create an account</h2>
+          <p class="auth-sub">Join the platform</p>
+          <div id="register-error" class="form-error" style="display:none"></div>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="reg-name" placeholder="John Doe" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="reg-email" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="reg-phone" placeholder="+1 555 0000" />
+          </div>
+          <div class="form-group">
+            <label>Payment Method</label>
+            <select id="reg-payment">
+              <option value="">Select method</option>
+              <option value="Telda">Telda</option>
+              <option value="instapay">instapay</option>
+
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="reg-password" placeholder="Min 8 characters" />
+          </div>
+          <button class="btn-primary full" id="register-btn">Create Account</button>
+          <p class="auth-switch">Have an account? <a href="#" data-page="login">Sign in</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD PAGE -->
+    <section class="page" id="page-dashboard">
+      <div class="dash-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p id="dash-greeting">Welcome back!</p>
+        </div>
+        <button class="btn-primary" data-page="new-request">+ New Request</button>
+      </div>
+      <div class="dash-stats" id="dash-stats">
+        <div class="dash-stat-card">
+          <span class="ds-num" id="ds-requests">0</span>
+          <span class="ds-label">Requests</span>
+        </div>
+        <div class="dash-stat-card">
+          <span class="ds-num" id="ds-projects">0</span>
+          <span class="ds-label">Projects</span>
+        </div>
+        <div class="dash-stat-card">
+          <span class="ds-num" id="ds-tickets">0</span>
+          <span class="ds-label">Open Tickets</span>
+        </div>
+        <div class="dash-stat-card">
+          <span class="ds-num" id="ds-meetings">0</span>
+          <span class="ds-label">Meetings Left</span>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="dash-panel">
+          <h3>Recent Requests</h3>
+          <div id="recent-requests-list"></div>
+        </div>
+        <div class="dash-panel">
+          <h3>Recent Activity</h3>
+          <div id="recent-activity-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW REQUEST PAGE -->
+    <section class="page" id="page-new-request">
+      <div class="page-header">
+        <h1>New Project Request</h1>
+        <p>Tell us what you need</p>
+      </div>
+      <div class="form-container">
+        <div class="form-card">
+          <div id="request-error" class="form-error" style="display:none"></div>
+          <div class="form-group">
+            <label>Project Title</label>
+            <input type="text" id="req-title" placeholder="e.g. E-commerce platform" />
+          </div>
+          <div class="form-group">
+            <label>Project Description</label>
+            <textarea id="req-desc" rows="6" placeholder="Describe your project in detail. What features do you need? What's the goal?"></textarea>
+            <div class="price-suggestion" id="price-suggestion" style="display:none">
+              💡 Estimated price: <strong id="suggested-price-display">$0</strong>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Deadline</label>
+              <input type="date" id="req-deadline" />
+            </div>
+            <div class="form-group">
+              <label>Complexity</label>
+              <select id="req-complexity">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-primary full" id="submit-request-btn">Submit Request →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS PAGE -->
+    <section class="page" id="page-projects">
+      <div class="page-header">
+        <h1>My Projects</h1>
+        <p>All your active projects</p>
+      </div>
+      <div id="projects-list" class="projects-list"></div>
+    </section>
+
+    <!-- PROJECT DETAIL PAGE -->
+    <section class="page" id="page-project-detail">
+      <div id="project-detail-content"></div>
+    </section>
+
+    <!-- ADMIN PAGE -->
+    <section class="page" id="page-admin">
+      <div class="admin-layout">
+        <div class="admin-sidebar">
+          <div class="admin-sidebar-logo">ADMIN</div>
+          <nav class="admin-nav">
+            <button class="admin-nav-item active" data-tab="overview">Overview</button>
+            <button class="admin-nav-item" data-tab="requests">Requests</button>
+            <button class="admin-nav-item" data-tab="projects">Projects</button>
+            <button class="admin-nav-item" data-tab="users">Users</button>
+            <button class="admin-nav-item" data-tab="portfolio">Portfolio</button>
+            <button class="admin-nav-item" data-tab="accounting">Accounting</button>
+            <button class="admin-nav-item" data-tab="logs">Activity Logs</button>
+            <button class="admin-nav-item" data-tab="content">Site Content</button>
+          </nav>
+        </div>
+        <div class="admin-main">
+
+          <!-- Overview Tab -->
+          <div class="admin-tab active" id="tab-overview">
+            <h2>Overview</h2>
+            <div class="admin-stats-grid" id="admin-stats-grid">
+              <div class="admin-stat"><span id="adm-total-users">0</span><label>Total Users</label></div>
+              <div class="admin-stat"><span id="adm-pending-req">0</span><label>Pending Requests</label></div>
+              <div class="admin-stat"><span id="adm-active-projects">0</span><label>Active Projects</label></div>
+              <div class="admin-stat"><span id="adm-total-revenue">$0</span><label>Total Revenue</label></div>
+            </div>
+            <h3 style="margin-top:2rem">Recent Requests</h3>
+            <div id="adm-recent-requests"></div>
+          </div>
+
+          <!-- Requests Tab -->
+          <div class="admin-tab" id="tab-requests">
+            <h2>Manage Requests</h2>
+            <div class="tab-filter">
+              <button class="filter-btn active" data-filter="pending">Pending</button>
+              <button class="filter-btn" data-filter="approved">Approved</button>
+              <button class="filter-btn" data-filter="rejected">Rejected</button>
+              <button class="filter-btn" data-filter="all">All</button>
+            </div>
+            <div id="admin-requests-list"></div>
+          </div>
+
+          <!-- Projects Tab -->
+          <div class="admin-tab" id="tab-projects">
+            <h2>Manage Projects</h2>
+            <div id="admin-projects-list"></div>
+          </div>
+
+          <!-- Users Tab -->
+          <div class="admin-tab" id="tab-users">
+            <h2>Manage Users</h2>
+            <div id="admin-users-list"></div>
+          </div>
+
+          <!-- Portfolio Tab -->
+          <div class="admin-tab" id="tab-portfolio">
+            <h2>Portfolio Management</h2>
+            <button class="btn-primary" id="add-portfolio-btn">+ Add Project</button>
+            <div id="portfolio-form" class="form-card" style="display:none;margin-top:1.5rem">
+              <div class="form-group"><label>Title</label><input type="text" id="pf-title" /></div>
+              <div class="form-group"><label>Description</label><textarea id="pf-desc" rows="3"></textarea></div>
+              <div class="form-group"><label>Image URL</label><input type="url" id="pf-image" /></div>
+              <div class="form-group"><label>External Link</label><input type="url" id="pf-link" /></div>
+              <div class="form-group"><label>Tags (comma separated)</label><input type="text" id="pf-tags" /></div>
+              <div class="form-row">
+                <button class="btn-primary" id="save-portfolio-btn">Save</button>
+                <button class="btn-ghost" id="cancel-portfolio-btn">Cancel</button>
+              </div>
+            </div>
+            <div id="admin-portfolio-list" style="margin-top:1.5rem"></div>
+          </div>
+
+          <!-- Accounting Tab -->
+          <div class="admin-tab" id="tab-accounting">
+            <h2>Accounting</h2>
+            <div class="accounting-summary">
+              <div class="acc-card"><span id="acc-total">$0</span><label>Total Earnings</label></div>
+              <div class="acc-card"><span id="acc-month">$0</span><label>This Month</label></div>
+              <div class="acc-card"><span id="acc-count">0</span><label>Paid Projects</label></div>
+            </div>
+            <h3 style="margin-top:2rem">Payment History</h3>
+            <div id="payments-list"></div>
+          </div>
+
+          <!-- Logs Tab -->
+          <div class="admin-tab" id="tab-logs">
+            <h2>Activity Logs</h2>
+            <div id="activity-logs-list"></div>
+          </div>
+
+          <!-- Content Tab -->
+          <div class="admin-tab" id="tab-content">
+            <h2>Site Content</h2>
+            <div id="content-editor-list"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Modals -->
+  <div id="modal-overlay" class="modal-overlay" style="display:none">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close">×</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
